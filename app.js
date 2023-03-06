@@ -4,6 +4,7 @@ const express = require('express')
 const cors = require('cors')
 //创建express服务器
 const app = express()
+const bodyParser = require('body-parser')
 
 //导入验证数据
 const joi = require('joi')
@@ -37,6 +38,9 @@ app.use(cors())
 
 //配置解析表单中间件
 app.use(express.urlencoded({ extended: true }))
+
+//处理body参数
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', userRouter)
 
