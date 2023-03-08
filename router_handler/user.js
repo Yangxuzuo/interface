@@ -70,8 +70,7 @@ exports.logIn = (req, res) => {
         console.log(results[0].password)
         console.log(compareResult)
         console.log(userinfo.password)
-        console.log(typeof results[0].password)
-        console.log(typeof userinfo.password)
+
 
         if (!compareResult) {
             return res.cc('登陆失败！密码错误')
@@ -84,12 +83,13 @@ exports.logIn = (req, res) => {
         const tokenStr = jwt.sign(user, config.jwtSecretKey, {
             expiresIn: '10h',
         })
+        const token = 'Bearer';
 
         res.send({
             status: 0,
             code: 200,
             message: '登录成功！',
-            token: 'Bearer' + tokenStr,
+            token: token,
         })
     })
 }
