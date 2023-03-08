@@ -33,7 +33,7 @@ exports.regUser = (req, res) => {
     })
 
     //加密获取的数据密码
-    userinfo.password = bcrypt.hashSync(userinfo.password, 10)
+    // userinfo.password = bcrypt.hashSync(userinfo.password, 10)
     // console.log(userinfo.password)
 
     //插入
@@ -66,13 +66,13 @@ exports.logIn = (req, res) => {
         if (err) return res.cc(err)
         if (results.length !== 1) return res.cc('登录失败！,用户未注册')
         //判断密码是否一致      
-        const compareResult = bcrypt.compareSync(userinfo.password, results[0].password)
+        // const compareResult = bcrypt.compareSync(userinfo.password, results[0].password)
         console.log(results[0].password)
-        console.log(compareResult)
+        //console.log(compareResult)
         console.log(userinfo.password)
 
 
-        if (!compareResult) {
+        if (userinfo.password !== results[0].password) {
             return res.cc('登陆失败！密码错误')
         }
 
