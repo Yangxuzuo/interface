@@ -92,4 +92,17 @@ exports.logIn = (req, res) => {
             token: token,
         })
     })
+},
+
+exports.getManagementData = (req, res) => {
+    const sql = `select * from homemanage`
+    db.query(sql, function(err, results) {
+        if(err) return res.cc(err)
+        console.log(results);
+        res.send({
+            status: 1,
+            code: 200,
+            data: results,
+        })
+    })
 }

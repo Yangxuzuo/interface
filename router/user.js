@@ -24,4 +24,7 @@ router.post('/reguser', expressJoi(reg_login_schema), UserHandler.regUser)
 //登录
 router.post('/login', expressJoi(reg_login_schema), UserHandler.logIn)
 
+//首页信息获取
+router.get('/getManagementData', UserHandler.getManagementData)
+
 module.exports = router;
