@@ -56,7 +56,22 @@ exports.regUser = (req, res) => {
 
 },
 
-
+exports.changePassword = (req, res) => {
+    console.log(req);
+    const userInfo = req.body
+    db.query(`update user set password='${userInfo.password}' where userId='${userInfo.userId}'`, function(err,result){
+        if(err){
+            console.log('修改失败')
+            return res.cc(err)
+        }
+        res.send({
+            status: 0,
+            code: 200,
+            message: '修改成功',
+        })
+    })
+    
+}
 exports.logIn = (req, res) => {
     const userinfo = req.body
     console.log(req);
@@ -89,6 +104,7 @@ exports.logIn = (req, res) => {
             status: 0,
             code: 200,
             message: '登录成功！',
+            ID: results[0].userId,
             token: token,
         })
     })

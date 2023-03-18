@@ -26,5 +26,7 @@ router.post('/login', expressJoi(reg_login_schema), UserHandler.logIn)
 
 //首页信息获取
 router.get('/getManagementData', UserHandler.getManagementData)
+// 修改用户密码
+router.post('/changePassword',UserHandler.changePassword)
 
 module.exports = router;

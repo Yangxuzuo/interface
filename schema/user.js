@@ -16,6 +16,7 @@ const joi = require('joi')
 const username = joi.string()
 
 //密码验证规则
+const userId = ''
 const password = joi.string()
 //.pattern(/^[\S]{6,12}$/)
 //注册和登录表单的验证规则对象
@@ -27,6 +28,7 @@ exports.reg_login_schema = {
     // },
     body: {
         username,
-        password
+        password,
+        userId,
     }
 }
