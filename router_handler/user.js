@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken')
 //导入token密钥
 const config = require('../config')
 
+// 注册用户
 exports.regUser = (req, res) => {
 
     //接受表单数据
@@ -56,10 +57,11 @@ exports.regUser = (req, res) => {
 
 },
 
+// 修改密码
 exports.changePassword = (req, res) => {
     console.log(req);
     const userInfo = req.body
-    db.query(`update user set password='${userInfo.password}' where userId='${userInfo.userId}'`, function(err,result){
+    db.query(`update user set password='${userInfo.newPassword}' where userId='${userInfo.id}'`, function(err,result){
         if(err){
             console.log('修改失败')
             return res.cc(err)
@@ -69,9 +71,10 @@ exports.changePassword = (req, res) => {
             code: 200,
             message: '修改成功',
         })
-    })
-    
+    }) 
 }
+
+// 登录
 exports.logIn = (req, res) => {
     const userinfo = req.body
     console.log(req);
@@ -85,8 +88,6 @@ exports.logIn = (req, res) => {
         console.log(results[0].password)
         //console.log(compareResult)
         console.log(userinfo.password)
-
-
         if (userinfo.password !== results[0].password) {
             return res.cc('登陆失败！密码错误')
         }
@@ -104,17 +105,18 @@ exports.logIn = (req, res) => {
             status: 0,
             code: 200,
             message: '登录成功！',
-            ID: results[0].userId,
+            id: results[0].userId,
             token: token,
         })
     })
 },
 
+// 获取首页数据
 exports.getManagementData = (req, res) => {
     const sql = `select * from homemanage`
     db.query(sql, function(err, results) {
         if(err) return res.cc(err)
-        console.log(results);
+        // console.log(results);
         res.send({
             status: 1,
             code: 200,
