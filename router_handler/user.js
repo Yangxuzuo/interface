@@ -124,3 +124,39 @@ exports.getManagementData = (req, res) => {
         })
     })
 }
+
+// 获取所有账号数据
+exports.userList = (req, res) => {
+    // console.log(req);
+    const { phoneOrName } = req.query
+    // console.log(phoneOrName);
+    // console.log(phoneOrName === '');
+    if( phoneOrName != '')
+    {
+        const sql = `select * from user where username='${phoneOrName}' or telephone='${phoneOrName}'`
+        db.query(sql,function(err, results) {
+            if(err) return res.cc(err)
+            // 剔除账号密码
+            results.map(val => delete val.password)
+            res.send({
+                status: 1,
+                code: 200,
+                data: results,
+            })
+        })
+    }
+    if( phoneOrName == ''){
+        const sql = `select * from user`
+        db.query(sql,function(err, results) {
+            if(err) return res.cc(err)
+            // 剔除账号密码
+            console.log('res',results);
+            results.map(val => delete val.password)
+            res.send({
+                status: 1,
+                code: 200,
+                data: results,
+            })
+        })
+    }
+}
