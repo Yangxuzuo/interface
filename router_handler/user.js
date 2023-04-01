@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 //导入token密钥
 const config = require('../config')
 
-// 注册用户
+// 新增用户
 exports.regUser = (req, res) => {
 
     //接受表单数据
