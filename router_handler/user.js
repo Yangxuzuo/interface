@@ -11,28 +11,28 @@ const config = require('../config')
 exports.regUser = (req, res) => {
 
     //接受表单数据
-    const userinfo = req.query
+    const userinfo = req.body
+    console.log(userinfo);
     // console.log(userinfo)
     //判断数据是否合法
     if (!userinfo.username || !userinfo.password) {
         //return res.send({ status: 1, message: '用户名或密码不能为空！' })
         return res.cc('用户名或密码不能为空！')
     }
-
     //定义sql语句查询
     const sqlStr = `select * from user where username = ?`
 
-    db.query(sqlStr, [userinfo.username], function (err, results) {
+    db.query(sqlStr, userinfo.username, function (err, results) {
         if (err) {
             //return res.send({ statue: 1, message: err.message })
             return res.cc(err)
         }
         if (results.length > 0) {
             //return res.send({ status: 1, message: '用户名被占用，请换其他的！' })
-            return res.cc('用户名被占用，请换其他的！')
+            return res.cc('用户名被占用！')
         }
     })
-
+    console.log('select over');
     //加密获取的数据密码
     // userinfo.password = bcrypt.hashSync(userinfo.password, 10)
     // console.log(userinfo.password)
@@ -40,7 +40,15 @@ exports.regUser = (req, res) => {
     //插入
     const sql = `insert into user set ?`
 
-    db.query(sql, { username: userinfo.username, password: userinfo.password }, function (err, results) {
+    db.query(sql, { username: userinfo.username, 
+                    password: userinfo.password,
+                    acType: userinfo.acType, 
+                    acName: userinfo.acName,
+                    telephone: userinfo.telephone, 
+                    type: userinfo.type,
+                    userId: userinfo.userId,
+                    founder: userinfo.founder,
+                    founderTime: userinfo.founderTime }, function (err, results) {
         if (err) {
             //return res.send({ status: 1, message: err.message })
             return res.cc(err)
@@ -51,7 +59,11 @@ exports.regUser = (req, res) => {
         }
 
         //res.send({ status: 0, message: '插入成功！' })
-        res.cc('插入成功！', 0)
+        res.send({
+            status: 0,
+            code: 200,
+            msg: '插入成功！'
+        })
 
     })
 
@@ -150,7 +162,7 @@ exports.userList = (req, res) => {
         db.query(sql,function(err, results) {
             if(err) return res.cc(err)
             // 剔除账号密码
-            console.log('res',results);
+            // console.log('res',results);
             results.map(val => delete val.password)
             res.send({
                 status: 1,

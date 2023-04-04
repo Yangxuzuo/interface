@@ -14,10 +14,14 @@ const joi = require('joi')
 // //密码验证规则
 // const password = joi.string().required()
 const username = joi.string()
-
-//密码验证规则
-const userId = ''
+const userId = joi.string()
+const acName = joi.string()
+const acType = joi.string()
+const telephone = joi.string()
+const type = joi.string()
 const password = joi.string()
+const founder = joi.string()
+const founderTime = joi.string()
 //.pattern(/^[\S]{6,12}$/)
 //
 //注册和登录表单的验证规则对象
@@ -30,6 +34,12 @@ exports.reg_login_schema = {
     body: {
         username,
         password,
-        userId
+        userId,
+        acName,
+        acType,
+        telephone,
+        type,
+        founder,
+        founderTime
     }
 }
