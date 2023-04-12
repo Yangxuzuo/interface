@@ -6,6 +6,7 @@ const express = require('express');
 const router = express.Router();
 
 const UserHandler = require('../router_handler/user')
+const SupplierHandler = require('../router_handler/supplier')
 
 //导入验证表单数据的中间件
 const expressJoi = require('@escook/express-joi')
@@ -26,4 +27,28 @@ router.get('/getManagementData', UserHandler.getManagementData)
 router.post('/changePassword',UserHandler.changePassword)
 // 获取所有账号信息
 router.get('/userList', UserHandler.userList)
+// 删除用户
+router.delete('/deleteUser', UserHandler.deleteUser)
+// 获取用户详情
+router.get('/getUserDetail', UserHandler.getUserDetail)
+// 重置用户密码
+router.post('/resetPassword', UserHandler.resetPassword)
+// 编辑用户
+router.post('/editUser', UserHandler.editUser)
+// 禁用或启用用户
+router.post('/banOrPinckUser', UserHandler.banOrPinckUser)
+
+// 获取供应商列表
+router.get('/supplier/supplierList', SupplierHandler.supplierList);
+//删除供应商
+router.delete('/supplier/deleteSupplier', SupplierHandler.deleteSupplier)
+//禁用或启用供应商
+router.post('/supplier/banOrPinckSupplier', SupplierHandler.banOrPinckSupplier)
+//编辑供应商
+router.post('/supplier/editSupplier', SupplierHandler.editSupplier)
+//获取供应商详情
+router.get('/supplier/getSupplierDetail', SupplierHandler.getSupplierDetail)
+// 新增供应商
+router.post('/supplier/addSupplier', SupplierHandler.addSupplier)
+
 module.exports = router;
