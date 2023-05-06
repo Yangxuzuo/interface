@@ -7,6 +7,9 @@ const router = express.Router();
 
 const UserHandler = require('../router_handler/user')
 const SupplierHandler = require('../router_handler/supplier')
+const PurchaserHandler = require('../router_handler/purchaser')
+const PurchasePlanHandler = require('../router_handler/purchasePlan')
+const GoodsHandler = require('../router_handler/goods')
 
 //导入验证表单数据的中间件
 const expressJoi = require('@escook/express-joi')
@@ -40,6 +43,8 @@ router.post('/banOrPinckUser', UserHandler.banOrPinckUser)
 
 // 获取供应商列表
 router.get('/supplier/supplierList', SupplierHandler.supplierList);
+// 获取供应商列表(无条件)
+router.get('/supplier/getSupplier', SupplierHandler.getSupplier);
 //删除供应商
 router.delete('/supplier/deleteSupplier', SupplierHandler.deleteSupplier)
 //禁用或启用供应商
@@ -50,5 +55,39 @@ router.post('/supplier/editSupplier', SupplierHandler.editSupplier)
 router.get('/supplier/getSupplierDetail', SupplierHandler.getSupplierDetail)
 // 新增供应商
 router.post('/supplier/addSupplier', SupplierHandler.addSupplier)
+
+// 采购员
+// 获取采购员列表
+router.get('/purchaser/purchaserList', PurchaserHandler.purchaserList)
+// 获取供应商列表(无条件)
+router.get('/purchaser/getPurchaser', PurchaserHandler.getPurchaser);
+// 删除采购员
+router.delete('/purchaser/deletePurchaser', PurchaserHandler.deletePurchaser)
+// 禁用或启用供应商
+router.post('/purchaser/banOrPinckPurchaser', PurchaserHandler.banOrPinckPurchaser)
+// 编辑供应商
+router.post('/purchaser/editPurchaser', PurchaserHandler.editPurchaser)
+// 获取供应商详情
+router.get('/purchaser/getPurchaserDetail', PurchaserHandler.getPurchaserDetail)
+// 新增供应商
+router.post('/purchaser/addPurchaser', PurchaserHandler.addPurchaser)
+
+// 计划单
+// 获取计划单列表
+router.get('/purchasePlan/purchasePlanList', PurchasePlanHandler.purchasePlanList)
+// 删除计划单
+router.delete('/purchasePlan/deletePurchasePlan', PurchasePlanHandler.deletePurchasePlan)
+// 计划单审核
+router.post('/purchasePlan/validatePurchasePlan', PurchasePlanHandler.validatePurchasePlan)
+// 编辑计划单
+router.post('/purchasePlan/editPurchasePlan', PurchasePlanHandler.editPurchasePlan)
+// 获取计划单详情
+router.get('/purchasePlan/getPurchasePlanDetail', PurchasePlanHandler.getPurchasePlanDetail)
+// 新增计划单
+router.post('/purchasePlan/addPurchasePlan', PurchasePlanHandler.addPurchasePlan)
+
+// 商品
+// 获取商品列表
+router.get('/goods/goodsList', GoodsHandler.goodsList)
 
 module.exports = router;
