@@ -26,7 +26,7 @@ exports.purchasePlanList = (req, res) => {
         })
     }
     if( purchasePlanId == ''){
-        const sql = `select * from purchasePlan`
+        const sql = `select * from purchasePlan where type='1'`
         db.query(sql,function(err, results) {
             if(err) return res.cc(err)
             // 剔除账号密码
@@ -203,4 +203,26 @@ exports.addPurchasePlan = (req, res) => {
 
     })
 
+}
+
+exports.submitPurcaseTask=(req,res) => {
+    const {purchaseWay,supplier,purchaser,purchasePlanId} = req.body;
+    console.log(purchaseWay,supplier,purchaser,purchasePlanId);
+    const id = purchasePlanId;
+    const sql = `update purchaseplan set ? where purchasePlanId='${id}'`
+    db.query(sql,{purchaseWay:purchaseWay,
+                  purchaser:purchaser,
+                  supplier:supplier}, function(err, results){
+                    if (err) {
+                            return res.cc(err)
+                            }
+                            if (results.affectedRows !== 1) {
+                                return res.cc('修改失败！')
+                            }
+                            res.send({
+                                status: 0,
+                                code: 200,
+                                msg: '修改成功！'
+                            })
+    })
 }

@@ -9,6 +9,7 @@ const UserHandler = require('../router_handler/user')
 const SupplierHandler = require('../router_handler/supplier')
 const PurchaserHandler = require('../router_handler/purchaser')
 const PurchasePlanHandler = require('../router_handler/purchasePlan')
+const PurchaseAssignHandle = require('../router_handler/purchaseAssign')
 const GoodsHandler = require('../router_handler/goods')
 
 //导入验证表单数据的中间件
@@ -77,6 +78,8 @@ router.post('/purchaser/addPurchaser', PurchaserHandler.addPurchaser)
 router.get('/purchasePlan/purchasePlanList', PurchasePlanHandler.purchasePlanList)
 // 删除计划单
 router.delete('/purchasePlan/deletePurchasePlan', PurchasePlanHandler.deletePurchasePlan)
+// 生成采购任务
+router.post('/purchasePlan/submitPurchaseTask', PurchasePlanHandler.submitPurcaseTask)
 // 计划单审核
 router.post('/purchasePlan/validatePurchasePlan', PurchasePlanHandler.validatePurchasePlan)
 // 编辑计划单
@@ -89,5 +92,9 @@ router.post('/purchasePlan/addPurchasePlan', PurchasePlanHandler.addPurchasePlan
 // 商品
 // 获取商品列表
 router.get('/goods/goodsList', GoodsHandler.goodsList)
+
+// 采购任务
+// 获取采购任务
+router.get('/purchaseAssign/purchasePlanList', PurchaseAssignHandle.purchasePlanList)
 
 module.exports = router;
