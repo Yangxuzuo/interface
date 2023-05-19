@@ -11,6 +11,9 @@ const PurchaserHandler = require('../router_handler/purchaser')
 const PurchasePlanHandler = require('../router_handler/purchasePlan')
 const PurchaseAssignHandle = require('../router_handler/purchaseAssign')
 const GoodsHandler = require('../router_handler/goods')
+const WareHouseHandler = require('../router_handler/wareHouse')
+const RoleHandler = require('../router_handler/role')
+const ContractHandler = require('../router_handler/contract')
 
 //导入验证表单数据的中间件
 const expressJoi = require('@escook/express-joi')
@@ -97,4 +100,16 @@ router.get('/goods/goodsList', GoodsHandler.goodsList)
 // 获取采购任务
 router.get('/purchaseAssign/purchasePlanList', PurchaseAssignHandle.purchasePlanList)
 
+// 仓库管理
+// 获取商品
+router.get('/wareHouse/getGoodsList', WareHouseHandler.getGoodsList)
+
+
+// 权限管理
+// 获取角色信息
+router.get('/role/roleList', RoleHandler.roleList)
+
+// 合同管理
+// 获取合同信息
+router.get('/contract/contractList', ContractHandler.contractList)
 module.exports = router;

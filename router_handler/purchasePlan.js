@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 
 // 获取所有计划单数据
 exports.purchasePlanList = (req, res) => {
-    console.log(req);
+    //console.log(req);
     const { purchasePlanId } = req.query
     console.log(purchasePlanId);
     // console.log(phoneOrName === '');
